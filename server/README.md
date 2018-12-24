@@ -1,8 +1,8 @@
 # Node Back End Config
 
-## installing dependencies
+## Installing dependencies (Requirement)
 
-Run `npm install` to install dependecies.
+Run `npm install` to install dependencies.
 
 ## Development server
 
