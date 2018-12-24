@@ -1,0 +1,98 @@
+:host { 
+    font-family: monospace;
+}
+.table-hover {
+    
+    margin-top: 10px;
+    box-shadow: -3px 5px 7px 0px #cee1ff;
+    tr:hover {
+        background-color: #e7f2ff;
+    }
+    .active {
+        background-image: url(../../assets/img/transparent-pattern.png);
+        background-color: #d1e2f7;
+        td, th {
+            color: #4363bb;
+        }
+        
+    }
+    td, th {
+        border-top: 1px solid #e5efff;
+        text-align: center;
+        color: #5783ff;
+    }
+    thead {
+        
+        th {
+            color: #d6e6ff;
+            background-image: url(../../assets/img/transparent-pattern.png);
+            background-color:#518ed4eb;
+            border-radius: 20px;
+        }
+    }
+    tr {
+        cursor: pointer;
+        td, th {
+            margin: 0 10px;
+        }
+
+    }
+}
+.pagination{
+    a:not([href]):not([tabindex]) {
+        color: #007bff;
+        text-decoration: none;
+    }
+    .page-link {
+        border: 0px none;
+    }
+    .page-item {
+        box-shadow: -3px 5px 7px 0px #cee1ff;
+    }
+    .page-item.active {
+        a:not([href]):not([tabindex]) {
+            color: #fff;
+            background-image: url(../../assets/img/transparent-pattern.png);
+            background-color:#518ed461;
+        }
+    }
+    .page-item.disabled {
+        a:not([href]):not([tabindex]) {
+            color: #84bfff;
+        }
+    }
+} 
+
+.dropdown-item {
+    padding: .25rem .8rem;
+    color: #007bff;
+    font-size: 0.75rem;
+}
+.dropdown-menu {
+    border-radius: 0rem;
+    border: 0px none;
+    box-shadow: -3px 5px 7px 0px #cee1ff;
+}
+.btn-controller {
+    .btn {
+        border: 1px solid #87c1ff;
+        color: #007bff;
+        background: none;
+        border-radius: 0px;
+        padding: 0 5px;
+        font-size: inherit;
+        line-height: inherit;
+    }
+    .btn:first-child {
+        border-color: #ffb3bb;
+        color: #dc3545;
+    }
+    .btn.def {
+        border-color: #7d7d7d;
+        color: #565656;
+    }
+}
+input[type="text"].form-control {
+    height: calc(1.88rem + 2px);
+    border-radius: 0;
+}

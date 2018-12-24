@@ -1,0 +1,127 @@
+<table class="table table-sm table-hover">
+  <thead>
+    <tr scope="col">
+      <th *ngFor="let head of headers">{{head}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let row of rows; let i = index" data-id="row.compCode" (click)="selectRow(row.compCode)" [class.active]="row.compCode === tableConfg.selectedRow">
+      <th class="btn-controller">{{i + 1}}
+        <button type="button" class="btn btn-danger mr-1" (click)="deleteData(row)">Remove</button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@update" (click)="preUpdateData(row)">Update</button>
+      </th>
+      <td>{{row.compCodeHRIS}}</td>
+      <td>{{row.compName}}</td>
+      <td>{{row.compAbbrName}}</td>
+      <td>{{row.compRegNo}}</td>
+      <td>{{row.compLogo}}</td>
+      <td>{{row.compActivateDate}}</td>
+      <!-- <td>
+        <input type="checkbox" class="form-control" id="is-active" checked="row.isActivate ? true: false">
+      </td> -->
+    </tr>
+  </tbody>
+</table>
+<nav aria-label="Page navigation example">
+  <!-- <ul class="pagination">
+
+    <li class="page-item"><a class="page-link" href="#" (click)="changePage($event, false)">Previous</a></li>
+
+    <li class="page-item" *ngFor="let row of tbConfig.pagination.range;let i = index;"><a class="page-link" [routerLink]="['/table', (tbConfig.pagination.from+i)]">{{(tbConfig.pagination.from+i)}}</a></li>
+    <li class="page-item"><a class="page-link" href="#" (click)="changePage($event, true)">Next</a></li>
+
+    </ul> -->
+    <!-- pager -->
+    <ul class="pagination" *ngIf="pager.pages && pager.pages.length">
+        <li class="page-item" [ngClass]="{disabled:pager.currentPage === 1}">
+            <a class="page-link" (click)="setPage(1)">First</a>
+        </li>
+        <li class="page-item" [ngClass]="{disabled:pager.currentPage === 1}">
+            <a class="page-link" (click)="setPage(pager.currentPage - 1)">Previous</a>
+        </li>
+
+        <li class="page-item" *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+            <a class="page-link" (click)="setPage(page)">{{page}}</a>
+        </li>
+
+        <li class="page-item" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+            <a class="page-link" (click)="setPage(pager.currentPage + 1)">Next</a>
+        </li>
+        <li class="page-item" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+            <a class="page-link" (click)="setPage(pager.totalPages)">Last</a>
+        </li>
+        <li class="page-item dropdown">
+          <a class="page-link dropdown-toggle" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Page Limitaion
+          </a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" *ngFor="let limit of limits" href="#" (click)="getCompanies(tbConfig.page, limit)">{{limit}}</a>
+          </div>      
+        </li>
+    
+        <li class="page-item">
+          <button type="button" class="btn-primary page-link" data-toggle="modal" data-target="#exampleModal" data-whatever="@insert" (click)="preInsert()">Insert</button>
+        </li>
+    
+      </ul>
+
+
+    
+   
+
+</nav>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form *ngIf="!confirm.isConfirmed; else conirmPopup">
+          <div class="form-group">
+            <label for="company-code" class="col-form-label">Company code:</label>
+            <input type="text" class="form-control" [(ngModel)]="inMemoryRow.compCode" name="compcode" id="company-code">
+          </div>
+          <div class="form-group">
+            <label for="company-code-hris" class="col-form-label">Company code HRIS:</label>
+            <input type="text" class="form-control" [(ngModel)]="inMemoryRow.compCodeHRIS" name="compcodehris" id="company-code-hris">
+          </div>
+          <div class="form-group">
+            <label for="comp-abbr-name" class="col-form-label">Company abbreviation name:</label>
+            <input type="text" class="form-control" [(ngModel)]="inMemoryRow.compName" name="compabbr" id="comp-abbr-name">
+          </div>
+          <div class="form-group">
+            <label for="comp-reg-no" class="col-form-label">Company register number:</label>
+            <input type="text" class="form-control" [(ngModel)]="inMemoryRow.compAbbrName" name="compregnum" id="comp-reg-no">
+          </div>
+          <div class="form-group">
+            <label for="comp-logo" class="col-form-label">Company logo:</label>
+            <input type="text" class="form-control" [(ngModel)]="inMemoryRow.compRegNo" name="complogo" id="comp-logo">
+          </div>
+          <div class="form-group">
+            <label for="comp-activate-date" class="col-form-label">Company activate date:</label>
+            <input type="text" class="form-control" [(ngModel)]="inMemoryRow.compLogo" name="compactdate" id="comp-activate-date">
+          </div>
+          <div class="form-group">
+            <label for="is-active" style="display: inline;" class="col-form-label">Is active ?</label>
+            <input type="checkbox" style="float: right;width: 14px;vertical-align: middle;margin-top: -8px;" class="form-control" [(ngModel)]="inMemoryRow.compActiveDate" name="isactive" id="is-active" [checked]="inMemoryRow.isActive">
+          </div>
+        </form>
+        <ng-template #conirmPopup>
+          {{confirm.msg}}
+        </ng-template>
+      </div>
+      <div class="modal-footer btn-controller" *ngIf="!confirm.isConfirmed">
+        <button type="button" class="btn btn-secondary def" data-dismiss="modal">Close</button>
+        
+        <button type="button" class="btn btn-primary" (click)="insertData()" *ngIf="confirm.isInsert; else updateSubmit">Insert</button>
+        <ng-template #updateSubmit>
+          <button type="button" class="btn btn-primary" (click)="updateData()">Update</button>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+/client/node_modules
+/server/node_modules
+/server/dist
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# misc
+/client/.sass-cache
+/client/connect.lock
+/client/coverage
+/client/libpeerconnection.log
+/client/npm-debug.log
+/client/yarn-error.log
+/client/testem.log
+/client/typings
+
+/server/.sass-cache
+/server/connect.lock
+/server/coverage
+/server/libpeerconnection.log
+/server/npm-debug.log
+/server/yarn-error.log
+/server/testem.log
+/server/typings
+
+# System Files
+.DS_Store
+Thumbs.db
